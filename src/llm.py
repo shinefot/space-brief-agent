@@ -29,11 +29,10 @@ class LLMClient:
                     system=system,
                     messages=[{"role": "user", "content": user}],
                 )
-                # Join all text blocks (tool blocks, if any, are ignored here).
                 return "".join(
                     b.text for b in resp.content if getattr(b, "type", None) == "text"
                 ).strip()
-            except Exception as e:  # noqa: BLE001 - we want to retry on any API error
+            except Exception as e:  # noqa: BLE001
                 last_err = e
                 wait = 2 ** attempt
                 log.warning("LLM call failed (attempt %d/%d): %s — retrying in %ds",
@@ -42,8 +41,11 @@ class LLMClient:
         raise RuntimeError(f"LLM call failed after {retries} attempts: {last_err}")
 
     def complete_json(self, model: str, system: str, user: str,
-                      max_tokens: int = 4000) -> Any:
+                      max_tokens: int = 16000) -> Any:
         """Return parsed JSON. One self-correcting retry if the first parse fails."""
+        # Give JSON outputs generous room — a truncated response can't be parsed
+        # or repaired, so never let the budget drop below a safe floor.
+        max_tokens = max(max_tokens, 16000)
         raw = self.complete(model, system, user, max_tokens=max_tokens)
         try:
             return json.loads(_strip(raw))
