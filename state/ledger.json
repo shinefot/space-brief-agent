@@ -1,4 +1,77 @@
 {
-  "capabilities": {},
-  "last_run": null
+  "capabilities": {
+    "autonomous_refueling": {
+      "cn": "Active in-orbit servicing and refueling demonstrations",
+      "last_updated": "2026-06-03",
+      "notes": "No movement this week; commercial refueling tugs remain latent co-orbital inspection/grappling capability.",
+      "us": "Multiple commercial refueling/tug efforts in development"
+    },
+    "cislunar_operations": {
+      "cn": "Sustained lunar/cislunar mission investment with latent military utility",
+      "last_updated": "2026-06-03",
+      "notes": "US capability gap in cislunar spacecraft, propulsion, and SDA remains substantial and closing slowly despite doctrinal move.",
+      "us": "SPACECOM studying offensive cislunar concepts; doctrinal shift acknowledged"
+    },
+    "counterspace_resilience": {
+      "cn": "Demonstrated counterspace intent; investment in degrading US awareness",
+      "last_updated": "2026-06-03",
+      "notes": "Public US candor on vulnerability signals acceleration of distributed ground/EW investments.",
+      "us": "Epic Fury exposed distributed-ops and EW gaps; hardening pressure rising"
+    },
+    "geo_rpo": {
+      "cn": "Demonstrated GEO RPO and towing (e.g., SJ-series maneuvers)",
+      "last_updated": "2026-06-03",
+      "notes": "No movement this week; remains a closely contested capability area.",
+      "us": "Operational servicing/RPO heritage (MEV-class)"
+    },
+    "high_power_orbital_platforms": {
+      "cn": "Multiple parallel LEO broadband/D2D programs (Qianfan, Guowang)",
+      "last_updated": "2026-06-03",
+      "notes": "Power-dense buses are inherently dual-use (sensors, DE, EW); China advancing D2D for denied-environment comms across parallel programs.",
+      "us": "Muon Condor-Ultra (Starship-class) bus pitched; no anchor customer"
+    },
+    "on_orbit_retrieval_downmass": {
+      "cn": "Recoverable capsule heritage; no comparable commercial downmass-for-manufacturing vehicle disclosed",
+      "last_updated": "2026-06-03",
+      "notes": "Starfall is planning-intent only but a latent on-orbit retrieval capability with intelligence utility if realized.",
+      "us": "SpaceX Starfall reentry vehicle in FAA-planning stage; Dragon downmass operational"
+    },
+    "orbital_transfer_vehicles": {
+      "cn": "Active but less publicly visible OTV/tug development",
+      "last_updated": "2026-06-03",
+      "notes": "US widened lead in commercial OTV cadence; high-cadence OTV is latent responsive on-orbit maneuver / RPO capability.",
+      "us": "Production-scaling (Impulse $500M); multiple commercial OTV providers"
+    },
+    "responsive_launch": {
+      "cn": "Demonstrated no-notice maiden flight of reusable LM-12B with operational payloads",
+      "last_updated": "2026-06-03",
+      "notes": "China narrowed gap this week with demonstrated hardware and no-notice posture compressing foreign characterization windows.",
+      "us": "Mature reusable cadence (Falcon 9); Tactically Responsive Space doctrine maturing"
+    },
+    "reusable_heavy_lift": {
+      "cn": "LM-12B converging on boostback/propulsive-landing architecture; medium-heavy class",
+      "last_updated": "2026-06-03",
+      "notes": "China deliberately converging on proven Falcon 9 reuse design, compressing cost-per-kg curve faster than independent path.",
+      "us": "Operational reusable lead (Falcon 9/Heavy); Starship in development"
+    },
+    "sb_amti_targeting": {
+      "cn": "Parallel LEO remote-sensing/targeting constellation investment",
+      "last_updated": "2026-06-03",
+      "notes": "US moved to close perceived time-sensitive-targeting gap; multi-vendor approach adds counterspace resilience.",
+      "us": "Funded proliferated LEO SB-AMTI layer ($4.16B SpaceX + planned multi-vendor)"
+    },
+    "space_based_interceptors": {
+      "cn": "No confirmed comparable space-based kinetic interceptor program",
+      "last_updated": "2026-06-03",
+      "notes": "First US move toward space-based kinetic weapons in decades; overlaps co-orbital attack capability set; slippage likely.",
+      "us": "Northrop-Apex Golden Dome SBI; 2027 on-orbit demo target"
+    },
+    "vleo_persistent_isr": {
+      "cn": "Not the lead actor; India-Korea (Bellatrix/TelePIX) 2028 allied demo",
+      "last_updated": "2026-06-03",
+      "notes": "Allied/partner VLEO propulsion development creates intel-sharing opportunity and proliferation-tracking need; air-breathing VLEO unproven at scale.",
+      "us": "Limited disclosed air-breathing VLEO ISR programs"
+    }
+  },
+  "last_run": "2026-06-03T18:18:51.341136+00:00"
 }
