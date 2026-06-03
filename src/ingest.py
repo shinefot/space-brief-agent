@@ -18,6 +18,14 @@ log = logging.getLogger("ingest")
 
 _TAGS = re.compile(r"<[^>]+>")
 
+# Many news sites block non-browser clients. Identify as a normal browser so
+# their bot-protection lets the feed through.
+_BROWSER_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
+}
+
 
 def _clean(html: str, limit: int = 600) -> str:
     text = _TAGS.sub(" ", html or "")
@@ -33,12 +41,18 @@ def _parsed_date(entry) -> datetime | None:
     return None
 
 
+def _fetch_feed(url: str):
+    """Fetch a feed as a browser would, then hand the bytes to feedparser."""
+    resp = requests.get(url, headers=_BROWSER_HEADERS, timeout=25)
+    return feedparser.parse(resp.content)
+
+
 def fetch_rss(sources: SourceConfig, lookback_days: int) -> list[RawItem]:
     cutoff = datetime.now(timezone.utc) - timedelta(days=lookback_days)
     items: list[RawItem] = []
     for feed in sources.feeds:
         try:
-            parsed = feedparser.parse(feed["url"])
+            parsed = _fetch_feed(feed["url"])
             if parsed.bozo and not parsed.entries:
                 log.warning("Feed unreadable, skipping: %s (%s)", feed["name"], feed["url"])
                 continue
@@ -46,7 +60,7 @@ def fetch_rss(sources: SourceConfig, lookback_days: int) -> list[RawItem]:
             for e in parsed.entries:
                 pub = _parsed_date(e)
                 if pub and pub < cutoff:
-                    continue  # outside window
+                    continue
                 link = getattr(e, "link", "")
                 if not link:
                     continue
@@ -71,7 +85,7 @@ def check_feeds(sources: SourceConfig) -> None:
     """Utility: report which feeds are alive. Run via `python run.py --check-feeds`."""
     for feed in sources.feeds:
         try:
-            parsed = feedparser.parse(feed["url"])
+            parsed = _fetch_feed(feed["url"])
             n = len(parsed.entries)
             status = f"OK  ({n} entries)" if n else "EMPTY / unreadable"
         except Exception as e:  # noqa: BLE001
@@ -79,10 +93,6 @@ def check_feeds(sources: SourceConfig) -> None:
         print(f"  [{status:<22}] {feed['name']}  ->  {feed['url']}")
 
 
-# ---------------------------------------------------------------------------
-# Launch Library 2 — launch context (free tier: ~15 req/hr per IP).
-# We make a single call to the "previous launches" window.
-# ---------------------------------------------------------------------------
 _COUNTRY_MAP = {"USA": "US", "United States": "US", "CHN": "CN", "China": "CN"}
 
 
