@@ -14,6 +14,12 @@ def _split(value: str) -> list[str]:
     return [v.strip() for v in (value or "").split(",") if v.strip()]
 
 
+def _env(name: str, default: str) -> str:
+    """Return an env var, falling back to default when missing OR empty/blank."""
+    value = os.environ.get(name, "")
+    return value.strip() if value and value.strip() else default
+
+
 @dataclass
 class Settings:
     anthropic_api_key: str
@@ -34,25 +40,25 @@ class Settings:
 
     @classmethod
     def from_env(cls) -> "Settings":
-        key = os.environ.get("ANTHROPIC_API_KEY", "")
+        key = _env("ANTHROPIC_API_KEY", "")
         if not key:
             raise RuntimeError("ANTHROPIC_API_KEY is not set.")
         return cls(
             anthropic_api_key=key,
-            model_score=os.environ.get("MODEL_SCORE", "claude-haiku-4-5-20251001"),
-            model_analyze=os.environ.get("MODEL_ANALYZE", "claude-sonnet-4-6"),
-            model_synthesize=os.environ.get("MODEL_SYNTHESIZE", "claude-opus-4-8"),
-            lookback_days=int(os.environ.get("LOOKBACK_DAYS", "7")),
-            min_significance=int(os.environ.get("MIN_SIGNIFICANCE", "2")),
-            ll2_base=os.environ.get("LL2_BASE", "https://ll.thespacedevs.com/2.3.0").rstrip("/"),
-            ll2_api_key=os.environ.get("LL2_API_KEY", ""),
-            smtp_host=os.environ.get("SMTP_HOST", ""),
-            smtp_port=int(os.environ.get("SMTP_PORT", "587")),
-            smtp_user=os.environ.get("SMTP_USER", ""),
-            smtp_pass=os.environ.get("SMTP_PASS", ""),
-            email_from=os.environ.get("EMAIL_FROM", ""),
+            model_score=_env("MODEL_SCORE", "claude-haiku-4-5-20251001"),
+            model_analyze=_env("MODEL_ANALYZE", "claude-sonnet-4-6"),
+            model_synthesize=_env("MODEL_SYNTHESIZE", "claude-opus-4-8"),
+            lookback_days=int(_env("LOOKBACK_DAYS", "7")),
+            min_significance=int(_env("MIN_SIGNIFICANCE", "2")),
+            ll2_base=_env("LL2_BASE", "https://ll.thespacedevs.com/2.3.0").rstrip("/"),
+            ll2_api_key=_env("LL2_API_KEY", ""),
+            smtp_host=_env("SMTP_HOST", ""),
+            smtp_port=int(_env("SMTP_PORT", "587")),
+            smtp_user=_env("SMTP_USER", ""),
+            smtp_pass=_env("SMTP_PASS", ""),
+            email_from=_env("EMAIL_FROM", ""),
             email_to=_split(os.environ.get("EMAIL_TO", "")),
-            state_dir=os.environ.get("STATE_DIR", "state"),
+            state_dir=_env("STATE_DIR", "state"),
         )
 
 
