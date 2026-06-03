@@ -1,0 +1,10 @@
+anthropic>=0.40.0
+feedparser>=6.0.11
+requests>=2.32.0
+PyYAML>=6.0.2
+python-dotenv>=1.0.1
+
+# Optional — only needed for the orbital RPO/maneuver module (src/ingest_orbital.py)
+sgp4>=2.23
+numpy>=1.26
+spacetrack>=1.3.0

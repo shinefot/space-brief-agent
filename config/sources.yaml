@@ -1,0 +1,148 @@
+# =============================================================================
+# Space Brief Agent — Source Registry & Editorial Scope
+# Everything the agent "knows about" lives here. Edit this file to tune the
+# briefing; the code is generic.
+# =============================================================================
+
+# -- Mission statement injected into every LLM prompt so scoring/analysis stay on-thesis.
+scope: >
+  A weekly intelligence briefing on the orbital-space industry in the United States
+  and China, written for a reader who works in technology strategy AND U.S.
+  defense/national-security. The editorial thesis is "space maneuver and logistics,
+  read through a dual-use lens." Prioritize: orbital transfer vehicles, space tugs,
+  kick stages and reusable heavy-lift (movers); in-orbit servicing, assembly and
+  manufacturing (ISAM) — refueling, docking, life-extension, debris removal; and
+  rendezvous & proximity operations (RPO). For every commercial development, assess
+  the dual-use / national-security implication (e.g. a commercial refueling tug is
+  also a co-orbital inspection/grappling capability). Maintain a direct U.S.-vs-China
+  ledger to map asymmetric capability. De-prioritize: consumer space tourism,
+  generic astronomy/science-mission PR, and routine financing news with no
+  capability signal.
+
+# -- Pillars. The 'id' is referenced in code; 'guidance' is fed to the LLM.
+pillars:
+  - id: transport
+    name: "Transport / Movers"
+    guidance: >
+      OTVs, space tugs, kick stages, last-mile orbital delivery, and reusable
+      heavy-lift used as a mover. Treat launch cadence itself as context, not a
+      headline, unless a new vehicle/capability debuts.
+  - id: isam
+    name: "In-Orbit Servicing & Infrastructure (ISAM)"
+    guidance: >
+      Refueling, docking/berthing mechanisms, life-extension, robotic servicing,
+      debris removal, in-space assembly/manufacturing, and orbital depots/stations.
+  - id: dualuse
+    name: "Dual-Use & Defense Read"
+    guidance: >
+      The national-security interpretation: RPO, responsive/tactically-responsive
+      space, on-orbit maneuver warfare, space domain awareness, counterspace, and
+      how a given commercial capability maps to a military one. THIS is where the
+      U.S.-vs-China asymmetry analysis lives.
+  - id: context
+    name: "Access & Constellations (context)"
+    guidance: >
+      Thin background layer: notable launch-access shifts and megaconstellation
+      deployment progress (Guowang, Qianfan/G60 vs Starlink/Starshield). Mostly
+      auto-generated from the launch API; only surface as a headline on a real shift.
+
+# -- Entity watchlists. Used to bias relevance scoring and to key the asymmetry ledger.
+entities:
+  US:
+    transport:  [SpaceX, Blue Origin, Impulse Space, Rocket Lab, Firefly Aerospace, ULA, Stoke Space]
+    isam:       ["Northrop Grumman SpaceLogistics", Starfish Space, Orbit Fab, "Astroscale U.S.", Katalyst Space, Arkisys, Gravitics, "Vast"]
+    dualuse:    ["U.S. Space Force", "Space Systems Command", DARPA, "Space Development Agency", "Space RCO", NASA OSAM]
+  CN:
+    transport:  ["Space Pioneer (Tianbing)", Galactic Energy, LandSpace, "iSpace (Interstellar Glory)", Orienspace, "CAS Space", "Deep Blue Aerospace", CASC, CASIC]
+    isam:       ["Shijian fleet (SJ-21/SJ-25)", "Origin Space", "China Satellite Network (Guowang)"]
+    dualuse:    ["PLA Aerospace Force", "Shiyan series", "Shijian series", CNSA]
+
+# -- RSS / Atom feeds. trust: primary | secondary | aggregator.
+#    VERIFY these URLs on first run with:  python run.py --check-feeds
+#    Dead feeds are logged and skipped, never fatal.
+feeds:
+  - name: "SpaceNews"
+    url: "https://spacenews.com/feed/"
+    country: INTL
+    trust: secondary
+    pillars: [transport, isam, dualuse, context]
+  - name: "SpaceNews — China Report"
+    url: "https://spacenews.com/section/china/feed/"
+    country: CN
+    trust: secondary
+    pillars: [transport, isam, dualuse, context]
+  - name: "Ars Technica — Space"
+    url: "https://arstechnica.com/space/feed/"
+    country: INTL
+    trust: secondary
+    pillars: [transport, isam, context]
+  - name: "Payload"
+    url: "https://payloadspace.com/feed/"
+    country: INTL
+    trust: secondary
+    pillars: [transport, isam, dualuse, context]
+  - name: "NASASpaceflight"
+    url: "https://www.nasaspaceflight.com/feed/"
+    country: INTL
+    trust: secondary
+    pillars: [transport, isam, context]
+  - name: "Breaking Defense — Space"
+    url: "https://breakingdefense.com/full-topic-coverage/space/feed/"
+    country: US
+    trust: secondary
+    pillars: [dualuse]
+  - name: "Defense News — Space"
+    url: "https://www.defensenews.com/arc/outboundfeeds/rss/category/space/?outputType=xml"
+    country: US
+    trust: secondary
+    pillars: [dualuse]
+  - name: "SpacePolicyOnline"
+    url: "https://spacepolicyonline.com/feed/"
+    country: US
+    trust: secondary
+    pillars: [dualuse, context]
+  - name: "Dongfang Hour / China Space Monitor"
+    url: "https://chinaspacemonitor.substack.com/feed"
+    country: CN
+    trust: secondary
+    pillars: [transport, isam, dualuse, context]
+  - name: "Dongfang Hour (podcast notes)"
+    url: "https://feeds.buzzsprout.com/1216010.rss"
+    country: CN
+    trust: aggregator
+    pillars: [transport, isam, context]
+
+# -- Web-search seed queries for gap-filling (used by the optional search step).
+#    Keep tight and capability-focused.
+search_seeds:
+  - "China satellite refueling OR on-orbit servicing demonstration"
+  - "Shijian-25 OR Shijian-21 rendezvous proximity operations"
+  - "orbital transfer vehicle OR space tug contract award"
+  - "Space Force dynamic space operations OR responsive space"
+  - "Guowang OR Qianfan megaconstellation deployment"
+
+# -- Launch Library 2 launch-context settings.
+launch_context:
+  enabled: true
+  # Map LL2 launch-service-provider country codes we care about.
+  countries: [USA, CHN]
+  max_launches: 60
+
+# -- Orbital tasking signal (RPO / maneuver detection from Space-Track GP data).
+#    Requires SPACETRACK_USER / SPACETRACK_PASS env vars and the sgp4/spacetrack
+#    libraries. Degrades gracefully if unavailable. NORAD IDs below are PLACEHOLDERS
+#    — confirm current catalog numbers before relying on them (see README).
+orbital:
+  enabled: false                  # flip to true once you've set credentials + watchlist
+  window_hours: 72                # how far forward to propagate
+  step_minutes: 10                # propagation time step
+  proximity_range_km: 75          # flag sustained separation at or below this
+  proximity_rel_velocity_ms: 200  # ...AND relative velocity at or below this (station-keeping)
+  maneuver_delta_a_km: 2.0         # flag semi-major-axis step changes vs last run
+  event_significance: 4           # significance assigned to orbital events (1-5)
+  watchlist:
+    # name is for the brief; norad_id is what's queried. VERIFY these IDs.
+    - {name: "Shijian-21", norad_id: 48809}
+    - {name: "Shijian-25", norad_id: 0}        # fill in once cataloged
+    - {name: "MEV-1 (Northrop)", norad_id: 44625}
+    - {name: "MEV-2 (Northrop)", norad_id: 47502}
