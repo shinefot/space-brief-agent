@@ -18,8 +18,6 @@ log = logging.getLogger("ingest")
 
 _TAGS = re.compile(r"<[^>]+>")
 
-# Many news sites block non-browser clients. Identify as a normal browser so
-# their bot-protection lets the feed through.
 _BROWSER_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                   "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -42,9 +40,19 @@ def _parsed_date(entry) -> datetime | None:
 
 
 def _fetch_feed(url: str):
-    """Fetch a feed as a browser would, then hand the bytes to feedparser."""
-    resp = requests.get(url, headers=_BROWSER_HEADERS, timeout=25)
-    return feedparser.parse(resp.content)
+    """Try feedparser's own fetch first (works for most feeds, and for sites that
+    whitelist feed readers); only if that yields nothing, retry posing as a browser."""
+    parsed = feedparser.parse(url)
+    if parsed.entries:
+        return parsed
+    try:
+        resp = requests.get(url, headers=_BROWSER_HEADERS, timeout=25)
+        alt = feedparser.parse(resp.content)
+        if alt.entries:
+            return alt
+    except Exception:  # noqa: BLE001
+        pass
+    return parsed
 
 
 def fetch_rss(sources: SourceConfig, lookback_days: int) -> list[RawItem]:
