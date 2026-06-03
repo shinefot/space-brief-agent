@@ -87,7 +87,7 @@ feeds:
     trust: secondary
     pillars: [transport, isam, context]
   - name: "Breaking Defense — Space"
-    url: "https://breakingdefense.com/full-topic-coverage/space/feed/"
+    url: "https://breakingdefense.com/category/space/feed/"
     country: US
     trust: secondary
     pillars: [dualuse]
