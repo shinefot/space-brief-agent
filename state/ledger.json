@@ -2,76 +2,106 @@
   "capabilities": {
     "autonomous_refueling": {
       "cn": "Active in-orbit servicing and refueling demonstrations",
-      "last_updated": "2026-06-03",
+      "last_updated": "2026-06-08",
       "notes": "No movement this week; commercial refueling tugs remain latent co-orbital inspection/grappling capability.",
       "us": "Multiple commercial refueling/tug efforts in development"
     },
     "cislunar_operations": {
       "cn": "Sustained lunar/cislunar mission investment with latent military utility",
-      "last_updated": "2026-06-03",
-      "notes": "US capability gap in cislunar spacecraft, propulsion, and SDA remains substantial and closing slowly despite doctrinal move.",
-      "us": "SPACECOM studying offensive cislunar concepts; doctrinal shift acknowledged"
+      "last_updated": "2026-06-08",
+      "notes": "US commercial entrant targeting the exact regime where SDA is weakest; capital injected but SPAC financing and execution risk high. Gap closing slowly.",
+      "us": "SPACECOM studying offensive cislunar concepts; Quantum Space (Bolden) SPAC funds purpose-built HEO/cislunar maneuver craft"
     },
     "counterspace_resilience": {
       "cn": "Demonstrated counterspace intent; investment in degrading US awareness",
-      "last_updated": "2026-06-03",
-      "notes": "Public US candor on vulnerability signals acceleration of distributed ground/EW investments.",
-      "us": "Epic Fury exposed distributed-ops and EW gaps; hardening pressure rising"
+      "last_updated": "2026-06-08",
+      "notes": "Congressional friction signals anxiety that Space Force is trading enduring overhead capacity for unproven alternatives faster than replacements mature. Russian orbital GPS jamming raises the PNT-denial threat baseline (see pnt_denial).",
+      "us": "Epic Fury exposed distributed-ops/EW gaps; HASC pushing back on missile-warning cancellations and PNT-resilience choices"
     },
     "geo_rpo": {
       "cn": "Demonstrated GEO RPO and towing (e.g., SJ-series maneuvers)",
-      "last_updated": "2026-06-03",
-      "notes": "No movement this week; remains a closely contested capability area.",
-      "us": "Operational servicing/RPO heritage (MEV-class)"
+      "last_updated": "2026-06-08",
+      "notes": "US commercial RPO maturity could advance via Hubble reboost — docking/attitude-matching/delta-v transfer on a high-value non-standardized target, directly counterspace-relevant. Still contingent on mission economics.",
+      "us": "Operational servicing/RPO heritage (MEV-class); potential commercial Hubble reboost as uncooperative-target RPO pathfinder"
     },
     "high_power_orbital_platforms": {
-      "cn": "Multiple parallel LEO broadband/D2D programs (Qianfan, Guowang)",
-      "last_updated": "2026-06-03",
-      "notes": "Power-dense buses are inherently dual-use (sensors, DE, EW); China advancing D2D for denied-environment comms across parallel programs.",
+      "cn": "Multiple parallel LEO broadband/D2D programs (Qianfan, Guowang); state push toward on-orbit computing buses",
+      "last_updated": "2026-06-08",
+      "notes": "China layering coordinating/industrial-policy bodies around orbital compute — same state-coordination-then-subsidized-commercial pattern used for launch and LEO constellations. Power-dense buses inherently dual-use.",
       "us": "Muon Condor-Ultra (Starship-class) bus pitched; no anchor customer"
+    },
+    "leo_logistics_nodes": {
+      "cn": "State-backed station program operational",
+      "last_updated": "2026-06-08",
+      "notes": "New entry. Allied government anchor customers underpin the economics of persistent LEO platforms that are latent forward staging nodes for servicing/refueling/responsive ops. Recurring ISS air-leak shelter events underscore aging-platform fragility and US reliance on commercial crew vehicles.",
+      "us": "Commercial station developers courting European/allied anchor tenants as ISS winds down; Dragon serving as independent survival node"
+    },
+    "megaconstellation_deployment": {
+      "cn": "Qianfan crossed 200 satellites on sustained dual-rocket-family (LM-8/LM-6A) cadence; parallel Guowang build-out",
+      "last_updated": "2026-06-08",
+      "notes": "New entry. China still well behind Starlink rate but trend accelerating; dual rocket families reduce single-point-of-failure risk. Mature Qianfan/Guowang gives PLA resilient, commercially-deniable comms/PNT augmentation complicating US degradation efforts.",
+      "us": "Starlink deployment rate remains the benchmark; Kuiper diversifying onto Ariane 6 (36-sat batch)"
     },
     "on_orbit_retrieval_downmass": {
       "cn": "Recoverable capsule heritage; no comparable commercial downmass-for-manufacturing vehicle disclosed",
-      "last_updated": "2026-06-03",
-      "notes": "Starfall is planning-intent only but a latent on-orbit retrieval capability with intelligence utility if realized.",
+      "last_updated": "2026-06-08",
+      "notes": "No US movement; European Nyx cargo capsule validated parachute recovery (drop test) but 2028 timeline and allied provenance limit near-term competitive weight — still a latent maneuverable RPO/inspection platform.",
       "us": "SpaceX Starfall reentry vehicle in FAA-planning stage; Dragon downmass operational"
     },
+    "orbital_compute_kill_chain": {
+      "cn": "Beijing erecting coordinating committees/industrial-policy bodies for on-orbit computing capacity",
+      "last_updated": "2026-06-08",
+      "notes": "New entry. On-orbit edge processing for ISR/AI inference compresses sensor-to-effect latency and erodes US ground-processing edge; architecture opaque from open sources but the institutional pattern signals serious intent.",
+      "us": "Advantage rooted in ground-based processing speed; no disclosed equivalent orbital-compute industrial push"
+    },
     "orbital_transfer_vehicles": {
-      "cn": "Active but less publicly visible OTV/tug development",
-      "last_updated": "2026-06-03",
-      "notes": "US widened lead in commercial OTV cadence; high-cadence OTV is latent responsive on-orbit maneuver / RPO capability.",
-      "us": "Production-scaling (Impulse $500M); multiple commercial OTV providers"
+      "cn": "Active but less publicly visible OTV/tug development; pursuing high-power electric/nuclear propulsion",
+      "last_updated": "2026-06-08",
+      "notes": "NASA compressed NEP demo timeline signals urgency on high-delta-V cross-regime maneuver; flight-proven NEP would directly enable rapid repositioning and adversary-satellite shadowing. Slippage risk real.",
+      "us": "Production-scaling (Impulse $500M); multiple commercial OTV providers; NEP demo accelerated toward ~2027"
+    },
+    "pnt_denial": {
+      "cn": "Counterspace and EW intent; benefits from allied/adversary PNT-denial pressure on US",
+      "last_updated": "2026-06-08",
+      "notes": "New entry (INTL/Russia-driven). Evidence of Russian space-based GPS jamming/spoofing — a qualitative escalation beyond ground emitters that is harder to geolocate, attribute, and counter. Moderate open-source confidence; consistent with prior Russian EW doctrine.",
+      "us": "Defending PNT resilience; HASC criticizing GPS management amid replacement-pipeline anxiety"
     },
     "responsive_launch": {
       "cn": "Demonstrated no-notice maiden flight of reusable LM-12B with operational payloads",
-      "last_updated": "2026-06-03",
-      "notes": "China narrowed gap this week with demonstrated hardware and no-notice posture compressing foreign characterization windows.",
+      "last_updated": "2026-06-08",
+      "notes": "No movement this week.",
       "us": "Mature reusable cadence (Falcon 9); Tactically Responsive Space doctrine maturing"
     },
     "reusable_heavy_lift": {
       "cn": "LM-12B converging on boostback/propulsive-landing architecture; medium-heavy class",
-      "last_updated": "2026-06-03",
-      "notes": "China deliberately converging on proven Falcon 9 reuse design, compressing cost-per-kg curve faster than independent path.",
+      "last_updated": "2026-06-08",
+      "notes": "No movement this week; China continues deliberate convergence on proven Falcon 9 reuse design.",
       "us": "Operational reusable lead (Falcon 9/Heavy); Starship in development"
     },
     "sb_amti_targeting": {
       "cn": "Parallel LEO remote-sensing/targeting constellation investment",
-      "last_updated": "2026-06-03",
-      "notes": "US moved to close perceived time-sensitive-targeting gap; multi-vendor approach adds counterspace resilience.",
+      "last_updated": "2026-06-08",
+      "notes": "No movement this week; multi-vendor approach adds counterspace resilience.",
       "us": "Funded proliferated LEO SB-AMTI layer ($4.16B SpaceX + planned multi-vendor)"
     },
     "space_based_interceptors": {
       "cn": "No confirmed comparable space-based kinetic interceptor program",
-      "last_updated": "2026-06-03",
-      "notes": "First US move toward space-based kinetic weapons in decades; overlaps co-orbital attack capability set; slippage likely.",
+      "last_updated": "2026-06-08",
+      "notes": "No movement this week; overlaps co-orbital attack capability set; slippage likely.",
       "us": "Northrop-Apex Golden Dome SBI; 2027 on-orbit demo target"
+    },
+    "spectrum_orbital_slots": {
+      "cn": "Filed ITU claims for ~200,000 additional satellites ahead of WRC-27",
+      "last_updated": "2026-06-08",
+      "notes": "New entry. First-come-first-served filings function as legal squatter claims foreclosing future US/allied orbital and frequency access; WRC-27 becomes a space-power battleground. Ability to populate slots is secondary to the legal encumbrance.",
+      "us": "Lacks comparably aggressive ITU filing posture; exposure to interference claims in a crisis"
     },
     "vleo_persistent_isr": {
       "cn": "Not the lead actor; India-Korea (Bellatrix/TelePIX) 2028 allied demo",
-      "last_updated": "2026-06-03",
-      "notes": "Allied/partner VLEO propulsion development creates intel-sharing opportunity and proliferation-tracking need; air-breathing VLEO unproven at scale.",
+      "last_updated": "2026-06-08",
+      "notes": "UK NewOrbit closed $18.5M Series A but remains pre-flight with a distant 2028 target — Five Eyes-relevant but no near-term operational weight. Air-breathing VLEO still unproven at scale.",
       "us": "Limited disclosed air-breathing VLEO ISR programs"
     }
   },
-  "last_run": "2026-06-03T18:18:51.341136+00:00"
+  "last_run": "2026-06-08T16:50:37.294224+00:00"
 }
